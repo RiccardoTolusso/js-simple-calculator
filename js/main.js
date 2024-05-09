@@ -17,6 +17,10 @@ for(let i = 0; i < 16; i++){
         case "=":
             buttons[i].addEventListener('click', equalPressed)
             break
+
+        // CONTROLLO I PULSANTI DELLE OPERAZIONI
+        // per ogni pulsante imposto il valore di operator all'operatore corrispondente
+        // e imposto il valore del display a num2
         case "+":
             buttons[i].addEventListener('click', function (){
                 if (num2 === "0"){
@@ -49,9 +53,12 @@ for(let i = 0; i < 16; i++){
                 }
             })
             break
+
+        // CONTROLLO SE VIENE PREMUTO IL CANC
         case "C":
             buttons[i].addEventListener('click', clearPressed)
             break
+        // CONTROLLO SE HANNO PREMUTO UN QUALSIASI NUMERO
         default:
             // quando viene premuto un numero la funzione number pressed viene chiamata con argomento il numero corrispondente
             // sotto forma di stringa
@@ -64,37 +71,41 @@ for(let i = 0; i < 16; i++){
 
 
 // CLICK HANDLER FUNCTIONS 
+// gestisco la pressione del pulsante C Clear
 function clearPressed(){
+    // reimposto le variabili al loro valore originario 
     num1 = "0"
     num2 = "0"
     operator = ""
     operationResult = ""
+    // mostro il valore di default di num1 = 0
     calculatorDisplay.innerText = num1
 }
 
+// gestisco la pressione dell'uguale =
 function equalPressed(){
-    let result
     // controllo che ci sia un operatore 
     if ( operator !== "" ){
         switch (operator){
             case "addizione":
-                result = parseInt(num1) + parseInt(num2)
+                operationResult = parseInt(num1) + parseInt(num2)
                 break
             case "sottrazione":
-                result = parseInt(num1) - parseInt(num2)
+                operationResult = parseInt(num1) - parseInt(num2)
                 break
             case "moltiplicazione":
-                result = parseInt(num1) * parseInt(num2)
+                operationResult = parseInt(num1) * parseInt(num2)
                 break
             case "divisione":
+                // controllo che non si stia dividendo per 0
                 if (num2 !== "0"){
-                    result = parseInt(num1) / parseInt(num2)
+                    operationResult = parseInt(num1) / parseInt(num2)
                 } else {
-                    result = "Error"
+                    // se divido per 0 do come risultato errore
+                    operationResult = "Error"
                 }
                 break
         }
-        operationResult = result;
         calculatorDisplay.innerText = operationResult;
     }
 }
@@ -103,6 +114,7 @@ function numberPressed(number){
     // il number è una stringa rappresentante un numero ad una cifra
     if (operator === ""){
         // se l'operatore è vuoto aggiorno il numero 1
+        // perchè vuol dire che non ho ancora salvato il numero 1
         if (num1 === "0"){
             num1 = number;
         } else {
@@ -110,8 +122,8 @@ function numberPressed(number){
         }
         calculatorDisplay.innerText = num1;
     } else if(operationResult === ""){
-        // se il risultato è vuoto ma l'operatore c'è sto scrivendo 
-        // il secondo numero
+        // se il risultato è vuoto ma l'operatore c'è vuol dire che 
+        // ho salvato il primo numero ma sto ancora scrivendo il secondo
         if (num2 === "0"){
             num2 = number;
         } else {
