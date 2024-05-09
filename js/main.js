@@ -12,68 +12,58 @@ const buttons = document.getElementsByTagName("button")
 
 // itero tra tutti i bottoni
 // e ad ogni bottone assegno il corretto eventListener
+// andando a basarmi sul loro innerHTml     
 for(let i = 0; i < 16; i++){
-    // TODO: change the switch into an if else structure
-        // if = pressed 
-        // if CLEAR pressed
-        // if is number
-        // else => operator
-    /* this will allow me to create an operatorPressed function where i will move the switch */
-    switch (buttons[i].innerHTML){
-        case "=":
-            buttons[i].addEventListener('click', equalPressed)
-            break
-
-        // CONTROLLO I PULSANTI DELLE OPERAZIONI
-        // per ogni pulsante imposto il valore di operator all'operatore corrispondente
-        // e imposto il valore del display a num2
-        case "+":
-            buttons[i].addEventListener('click', function (){
-                if (num2 === "0"){
-                    operator = "addizione";
-                    calculatorDisplay.innerText = num2;
-                }
-            })
-            break
-        case "-":
-            buttons[i].addEventListener('click', function (){
-                if (num2 === "0"){
-                    operator = "sottrazione"
-                    calculatorDisplay.innerText = num2;
-                }
-            })
-            break
-        case "×":
-            buttons[i].addEventListener('click', function (){
-                if (num2 === "0"){
-                    operator = "moltiplicazione"
-                    calculatorDisplay.innerText = num2;
-                }
-            })
-            break
-        case "÷":
-            buttons[i].addEventListener('click', function (){
-                if (num2 === "0"){
-                    operator = "divisione"
-                    calculatorDisplay.innerText = num2;
-                }
-            })
-            break
-
-        // CONTROLLO SE VIENE PREMUTO IL CANC
-        case "C":
-            buttons[i].addEventListener('click', clearPressed)
-            break
-        // CONTROLLO SE HANNO PREMUTO UN QUALSIASI NUMERO
-        default:
-            // quando viene premuto un numero la funzione number pressed viene chiamata con argomento il numero corrispondente
-            // sotto forma di stringa
-            buttons[i].addEventListener('click', function (){
-                numberPressed(buttons[i].innerHTML)
-            })
+    if (buttons[i].innerHTML === "="){
+        // se l'inner HTML è =
+        buttons[i].addEventListener('click', equalPressed)
+    } else if (buttons[i].innerHTML === "C"){
+        // se l'innerHTML è C
+        buttons[i].addEventListener('click', clearPressed)
+    } else if(!isNaN(Number(buttons[i].innerHTML))){
+        // se l'innerHTML è un numero
+        buttons[i].addEventListener('click', function (){
+            numberPressed(buttons[i].innerHTML)
+        })
+    } else {
+        // se l'innerHTML è un operatore
+        buttons[i].addEventListener('click', function(){
+            operatorPressed(buttons[i].innerHTML)
+        })
     }
 
+
 }
+
+function operatorPressed(parameterOperator){
+    switch (parameterOperator){
+        case "+":
+            if (num2 === "0"){
+                operator = "addizione";
+                calculatorDisplay.innerText = num2;
+            }
+            break
+        case "-":
+            if (num2 === "0"){
+                operator = "sottrazione"
+                calculatorDisplay.innerText = num2;
+            }
+            break
+        case "×":
+            if (num2 === "0"){
+                operator = "moltiplicazione"
+                calculatorDisplay.innerText = num2;
+            }
+            break
+        case "÷":
+            if (num2 === "0"){
+                operator = "divisione"
+                calculatorDisplay.innerText = num2;
+            }
+            break
+    }
+}
+
 
 
 // CLICK HANDLER FUNCTIONS 
