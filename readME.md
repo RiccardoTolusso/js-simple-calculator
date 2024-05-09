@@ -14,5 +14,23 @@ C => clear pressed
 &#215; => operatorPressed('&#215;')
 &#247; => operatorPressed('&#247;')
 con uno switch e negli altri casi 
-number => numerPressed(parseInt(number))
+number => numerPressed(number)
 
+così facendo al click dei diversi pulsanti attivo diverse funzioni 
+
+Definisco delle "variabili globali"
+    definisco una costante calculatorDisplay che conterrà l'elemento HTML con id = "result"
+    
+    definisco 4 variabili 
+    num1 = ""
+    num2 = ""
+    operator = ""
+    operatioResult = ""
+
+Definisco la funzione numberPressed
+    controllo se operator è vuoto 
+        allora modifico e stampo a schermo num1
+    altrimenti se operationResult è vuoto
+        allora modifico e stampo num2
+    altrimenti 
+        non faccio nulla
