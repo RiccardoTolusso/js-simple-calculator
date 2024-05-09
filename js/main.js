@@ -99,22 +99,6 @@ function equalPressed(){
     }
 }
 
-function plusPressed(){
-    console.log("+")
-}
-
-function minusPressed(){
-    console.log("-")
-}
-
-function divisionPressed(){
-    console.log("/")
-}
-
-function moltiplicationPressed(){
-    console.log("x")
-}
-
 function numberPressed(number){
     // il number è una stringa rappresentante un numero ad una cifra
     if (operator === ""){
