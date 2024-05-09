@@ -13,6 +13,12 @@ const buttons = document.getElementsByTagName("button")
 // itero tra tutti i bottoni
 // e ad ogni bottone assegno il corretto eventListener
 for(let i = 0; i < 16; i++){
+    // TODO: change the switch into an if else structure
+        // if = pressed 
+        // if CLEAR pressed
+        // if is number
+        // else => operator
+    /* this will allow me to create an operatorPressed function where i will move the switch */
     switch (buttons[i].innerHTML){
         case "=":
             buttons[i].addEventListener('click', equalPressed)
